@@ -1,0 +1,569 @@
+/* =====================================================
+   StudyBuddy - style.css
+   Change the values in :root to restyle the whole app.
+   ===================================================== */
+
+:root {
+  /* Colours */
+  --teal: #0F766E;
+  --teal-dark: #0B5B55;
+  --teal-soft: #D9F2EE;
+  --ink: #1F2A28;          /* main text */
+  --muted: #5B6764;        /* hints and completed tasks */
+  --page: #F6F7F5;         /* page background */
+  --surface: #FFFFFF;      /* cards */
+  --border: #DDE3E0;
+  --input-border: #C5CEC9;
+  --track: #ECEFEC;
+  --error: #B42318;
+
+  /* Priority colours: background and text for each level */
+  --high-bg: #FDECEA;
+  --high-text: #B42318;
+  --high-dot: #B42318;
+  --medium-bg: #FFF1D6;
+  --medium-text: #8A5300;
+  --medium-dot: #B86E00;
+  --low-bg: #E1F3E6;
+  --low-text: #1D6B3A;
+  --low-dot: #2E8B50;
+
+  /* Fonts */
+  --font-heading: "Outfit", "Trebuchet MS", sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+}
+
+/* ---------- Basic reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+h1, h2, h3, p, ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+/* JavaScript shows and hides things with the "hidden" attribute */
+[hidden] {
+  display: none !important;
+}
+
+button:focus-visible,
+.input:focus-visible,
+.task-checkbox:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* ---------- Top bar ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--teal-dark);
+}
+
+.today-date {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---------- Page container ---------- */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.intro h1 {
+  font-family: var(--font-heading);
+  font-size: 44px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.intro p {
+  margin-top: 6px;
+  font-size: 19px;
+  color: var(--muted);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+/* ---------- Summary cards ---------- */
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.summary-card {
+  flex: 1 1 200px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.summary-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-icon-total {
+  background: var(--track);
+  color: var(--ink);
+}
+
+.summary-icon-pending {
+  background: var(--teal-soft);
+  color: var(--teal-dark);
+}
+
+.summary-icon-done {
+  background: var(--teal-dark);
+  color: #FFFFFF;
+}
+
+.summary-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.summary-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* The "Completed" card is solid teal */
+.summary-card-done {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #FFFFFF;
+}
+
+.summary-card-done .summary-label {
+  color: #FFFFFF;
+}
+
+/* ---------- Two-column layout: form on the left, list on the right ---------- */
+.layout {
+  display: flex;
+  flex-wrap: wrap;           /* stacks into one column on small screens */
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.add-card {
+  flex: 1 1 300px;
+  max-width: 360px;
+  padding: 24px;
+}
+
+.list-card {
+  flex: 999 1 480px;         /* takes all the remaining width */
+  min-width: 0;
+}
+
+.add-card h2 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* ---------- Form ---------- */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--input-border);
+  border-radius: 10px;
+}
+
+.input:focus {
+  border-color: var(--teal);
+}
+
+/* Red look when the title is missing (JavaScript adds this class) */
+.input.has-error {
+  border-color: var(--error);
+  background: #FFF8F7;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.error-message {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--error);
+}
+
+.btn {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  min-height: 50px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: var(--teal-dark);
+}
+
+/* ---------- Toolbar: search + filters ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1 1 200px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 15px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.search-input {
+  padding-left: 42px;
+  min-height: 46px;
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  background: var(--track);
+  border-radius: 12px;
+}
+
+.filter-button {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: #3F4B48;
+  cursor: pointer;
+}
+
+/* The filter that is currently chosen */
+.filter-button.is-active {
+  background: var(--teal);
+  color: #FFFFFF;
+}
+
+/* ---------- Task list ---------- */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--track);
+}
+
+.task-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 16px 16px;
+}
+
+/* Completed tasks: grey row, softer text, line through the title */
+.task-item.is-completed {
+  background: var(--page);
+}
+
+.task-item.is-completed .task-title {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: #8A9792;
+}
+
+.task-item.is-completed .priority-pill {
+  opacity: 0.8;
+}
+
+.task-checkbox {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  accent-color: var(--teal);
+  cursor: pointer;
+}
+
+.task-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.task-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.priority-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.priority-pill::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.priority-high {
+  background: var(--high-bg);
+  color: var(--high-text);
+}
+
+.priority-medium {
+  background: var(--medium-bg);
+  color: var(--medium-text);
+}
+
+.priority-low {
+  background: var(--low-bg);
+  color: var(--low-text);
+}
+
+.delete-button {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: var(--high-bg);
+  color: var(--high-text);
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  margin: 24px;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  border: 2px dashed var(--input-border);
+  border-radius: 16px;
+}
+
+.empty-state h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  color: var(--muted);
+}
+
+/* =====================================================
+   RESPONSIVE: tablets and phones
+   ===================================================== */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 12px 16px;
+  }
+
+  .page {
+    padding: 24px 16px 40px;
+  }
+
+  .intro h1 {
+    font-size: 30px;
+  }
+
+  .intro p {
+    font-size: 17px;
+  }
+
+  /* Three small summary cards in a row */
+  .summary {
+    gap: 10px;
+  }
+
+  .summary-card {
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .summary-icon {
+    display: none;
+  }
+
+  .summary-number {
+    font-size: 28px;
+  }
+
+  .summary-label {
+    font-size: 13px;
+  }
+
+  .add-card {
+    max-width: none;
+    flex-basis: 100%;
+    padding: 18px;
+  }
+
+  .toolbar {
+    padding: 16px;
+  }
+
+  .filters {
+    width: 100%;
+  }
+
+  .filter-button {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 14px;
+  }
+
+  .task-item {
+    padding: 12px 8px 12px 16px;
+    gap: 12px;
+  }
+
+  /* The priority label drops under the task title */
+  .task-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .task-title {
+    font-size: 16px;
+    flex: none;
+  }
+
+  .priority-pill {
+    font-size: 13px;
+    padding: 3px 10px;
+  }
+}
